@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../src/css/input.css" />
+  <link rel="stylesheet" href="../src/css/output.css" />
+  <title>Registro</title>
+</head>
+<body>
+  <div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+    <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+      <div class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-sky-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
+      <div class="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+        <div class="max-w-md mx-auto">
+          <div>
+            <h1 class="text-2xl font-semibold">Registro</h1>
+          </div>
+          <div class="divide-y divide-gray-200">
+            <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+
+              <div class="relative">
+                <input id="Username" name="Username" type="text" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none" placeholder="Nombre de usuario" />
+                <label for="Username" class="label">Nombre de usuario</label>
+              </div>
+
+              <div class="relative">
+                <input id="Password" name="Password" type="password" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none" placeholder="Contraseña" />
+                <label for="Password" class="label">Contraseña</label>
+              </div>
+
+              <div class="relative">
+                <input id="FirstName" name="FirstName" type="text" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none" placeholder="Primer nombre" />
+                <label for="FirstName" class="label">Primer nombre</label>
+              </div>
+
+              <div class="relative">
+                <input id="SecondName" name="SecondName" type="text" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none" placeholder="Segundo nombre" />
+                <label for="SecondName" class="label">Segundo nombre</label>
+              </div>
+
+              <div class="relative">
+                <input id="FirstLastName" name="FirstLastName" type="text" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none" placeholder="Primer apellido" />
+                <label for="FirstLastName" class="label">Primer apellido</label>
+              </div>
+
+              <div class="relative">
+                <input id="SecondLastName" name="SecondLastName" type="text" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none" placeholder="Segundo apellido" />
+                <label for="SecondLastName" class="label">Segundo apellido</label>
+              </div>
+
+              <div class="relative">
+                <input id="PhoneNumber" name="PhoneNumber" type="tel" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none" placeholder="Número de teléfono" />
+                <label for="PhoneNumber" class="label">Número de teléfono</label>
+              </div>
+
+              <div class="relative">
+                <input id="Email" name="Email" type="email" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none" placeholder="Correo electrónico" />
+                <label for="Email" class="label">Correo electrónico</label>
+              </div>
+
+              <div class="relative">
+                <select id="TypeIdentification" name="TypeIdentification" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none">
+                  <option value="CC">Cédula de ciudadanía</option>
+                  <option value="TI">Tarjeta de identidad</option>
+                  <option value="NIT">NIT</option>
+                  <!-- Agregar más opciones según sea necesario -->
+                </select>
+                <label for="TypeIdentification" class="label">Tipo de identificación</label>
+              </div>
+
+              <div class="relative">
+                <input id="NumberIdentification" name="NumberIdentification" type="number" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none" placeholder="Número de identificación" />
+                <label for="NumberIdentification" class="label">Número de identificación</label>
+              </div>
+
+              <div class="relative">
+                <button class="bg-cyan-500 text-white rounded-md px-4 py-2 hover:bg-cyan-400">Enviar</button>
+              </div>
+
+            <div class="pt-6 text-base leading-6 font-semibold">
+              <p>¿Ya tienes una cuenta? <a href="../pages/login.html" class="text-cyan-600 hover:text-cyan-500">Iniciar sesión</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .label {
+      @apply absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm;
+    }
+  </style>
+  <script src="../src/js/register.js"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autogestión Sena</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="../src/js/home.js"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+    <!-- Barra de navegación -->
+    <nav class="bg-blue-800 text-white shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-4">
+                    <h1 class="text-xl font-bold">Autogestión Sena</h1>
+                    <div class="hidden md:flex space-x-4">
+                        <a href="home.html" class="hover:text-blue-200 transition duration-200">Inicio</a>
+                        <div class="relative group">
+                            <button class="hover:text-blue-200 transition duration-200 flex items-center">
+                                Entidades <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div
+                                class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden group-hover:block z-10">
+                                <div class="py-1" id="entities-menu">
+                                    <a href="users.html"
+                                        class="block px-4 py-2 text-gray-800 hover:bg-blue-100">Usuarios</a>
+                                    <a href="rols.html"
+                                        class="block px-4 py-2 text-gray-800 hover:bg-blue-100">Roles</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Perfil de usuario -->
+                <div id="profile" class="flex items-center space-x-6">
+                    <div>
+                        <button onclick="window.location.href='profile.html'"
+                            class="flex items-center space-x-2 hover:text-cyan-600 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5.121 17.804A4.992 4.992 0 0010 20h4a4.992 4.992 0 004.879-2.196M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            <span id="username" class="text-lg"></span>
+
+                        </button>
+                    </div>
+                    <button id="logout" class="text-white px-3 py-1 rounded hover:text-cyan-600 transitio ">Cerrar
+                        sesión</button>
+                </div>
+            </div>
+            <!-- Menú móvil -->
+            <div class="md:hidden hidden" id="mobile-menu">
+                <div class="flex flex-col space-y-2 pb-4">
+                    <a href="home.html" class="hover:text-blue-200 transition duration-300">Inicio</a>
+                    <button class="hover:text-blue-200 transition duration-300 text-left" id="mobile-entities-button">
+                        Entidades
+                    </button>
+                    <div class="pl-4 hidden space-y-2" id="mobile-entities-menu">
+                        <a href="users.html" class="block hover:text-blue-200 transition duration-300">Usuarios</a>
+                        <a href="rols.html" class="block hover:text-blue-200 transition duration-300">Roles</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="container mx-auto px-4 py-6">
+        <!-- Sección de bienvenida -->
+        <section class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-gray-800">Bienvenido al Sistema de Gestión</h2>
+            </div>
+            <p class="text-gray-600 mb-4">Estás logueado correctamente. Selecciona una entidad del menú para comenzar a
+                gestionar tus datos.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
+                <!-- Tarjeta de entidad 1 -->
+                <div class="bg-blue-50 rounded-lg p-4 shadow hover:shadow-md transition duration-300">
+                    <h3 class="text-lg font-semibold text-blue-800 mb-2">Usuarios</h3>
+                    <p class="text-gray-600 mb-4">Gestiona los usuarios del sistema.</p>
+                    <a href="users.html" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                        Administrar
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
+
+
+
+                <!-- Tarjeta de entidad 3 -->
+                <div class="bg-purple-50 rounded-lg p-4 shadow hover:shadow-md transition duration-300">
+                    <h3 class="text-lg font-semibold text-purple-800 mb-2">Roles</h3>
+                    <p class="text-gray-600 mb-4">Gestiona la información de Roles.</p>
+                    <a href="rols.html" class="text-purple-600 hover:text-purple-800 font-medium flex items-center">
+                        Administrar
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts compartidos -->
+    <script src="../src/js/nav.js"></script>
+</body>
+
+</html>
