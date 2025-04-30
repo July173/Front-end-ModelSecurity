@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Usuarios - Autogestión Sena</title>
+    <title>Gestión de Roles - Autogestión Sena</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Estilos personalizados -->
@@ -93,21 +93,16 @@
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            ID
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Nombre
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Email
-                        </th>
+                        
+                       
+                        
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Rol
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Estado
+                            Descripción
                         </th>
+                        
                         <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Acciones
                         </th>
@@ -126,9 +121,7 @@
 
         <!-- Paginación -->
         <div class="flex justify-between items-center">
-            <div class="text-sm text-gray-500">
-                Mostrando <span id="showing-users">0</span> de <span id="total-users">0</span> Roles
-            </div>
+  
             <div class="flex space-x-2">
                 <button id="prev-page" class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-100 disabled:opacity-50">Anterior</button>
                 <div id="pagination-numbers" class="flex space-x-1">
@@ -149,34 +142,23 @@
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
                 </div>
-                <form id="user-form" class="space-y-4">
-                    <input type="hidden" id="user-id">
-                    
+                <form id="rol-form" class="space-y-4">
+                    <input type="hidden" id="rol-id">
                     <div>
-                        <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Nombre de Rol</label>
-                        <input type="text" id="username" name="username" required class="block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                      <label for="rol-name" class="block text-sm font-medium text-gray-700 mb-1">Nombre del Rol</label>
+                      <input type="text" id="rol-name" name="rol-name" required class="block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                     </div>
-                    
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                        <input type="email" id="email" name="email" required class="block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                    
-                    <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
-                        <input type="password" id="password" name="password" class="block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                        <p class="text-xs text-gray-500 mt-1">Dejar en blanco para mantener la contraseña actual (al editar)</p>
-                    </div>
-                    
+                        <label for="rol-description" class="block text-sm font-medium text-gray-700 mb-1">Descripción del Rol</label>
+                        <input type="text" id="rol-description" name="rol-description" required class="block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                      </div>
                   
-                    
-                   
-                    
                     <div class="flex justify-end space-x-2 mt-6">
-                        <button type="button" id="cancel-form" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">Cancelar</button>
-                        <button type="submit" id="submit-form" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Guardar</button>
+                      <button type="button" id="cancel-form" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">Cancelar</button>
+                      <button type="submit" id="submit-form" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Guardar</button>
                     </div>
-                </form>
+                  </form>
+                  
             </div>
         </div>
     </div>
@@ -195,13 +177,33 @@
         </div>
     </div>
 
- 
+    <section class="bg-white p-6 rounded shadow-md mt-6">
+        <h2 class="text-lg font-semibold mb-4">Asignar Permisos a un Rol</h2>
+      
+        <form id="assign-permissions-form">
+          <div class="mb-4">
+            <label for="rol-select" class="block mb-1 font-medium">Selecciona un Rol:</label>
+            <select id="rol-select" class="w-full border border-gray-300 rounded p-2"></select>
+          </div>
+      
+          <div id="form-list" class="space-y-4">
+            <!-- Se llenará con JavaScript -->
+          </div>
+      
+          <div class="mt-6 flex justify-end">
+            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+              Guardar Permisos
+            </button>
+          </div>
+        </form>
+      </section>
+      
 
     <!-- Scripts compartidos -->
     <script src="../src/js/nav.js"></script>
-    <!-- Módulo de API base -->
-    <script src="../src/js/api-base.js"></script>
+  
+    <script src="../src/js/rol-permissions.js"></script>
     <!-- Script específico para usuarios -->
-    <script src="../src/js/usuarios.js"></script>
+    <script src="../src/js/rol.js"></script>
 </body>
 </html>
