@@ -5,7 +5,7 @@ const assignForm = document.getElementById("assign-permissions-form");
 const apiRol = "https://localhost:7008/api/Rol/";
 const apiForm = "https://localhost:7008/api/Form/";
 const apiPerm = "https://localhost:7008/api/Permission/";
-const apiAsignar = "https://localhost:7008/api/RolFormPermission/";
+const apiAsignar = "https://localhost:7008/api/RolFormPermission/permission/";
 
 // Cargar roles
 async function cargarRoles() {
