@@ -6,6 +6,13 @@ const apiUserRol = "https://localhost:7008/api/RolUser/asignar";
 window.onload = fetchUsers;
 
 async function fetchUsers() {
+  if (!hasPermission("Lista de usuarios", "Ver")) {
+    // No tiene permiso de ver usuarios
+    const table = document.getElementById("user-table-body");
+    table.innerHTML = `<tr><td colspan="4" class="text-center py-4 text-gray-500">No tienes permiso para ver esta sección.</td></tr>`;
+    return;
+  }
+
   try {
     const res = await fetch(apiUrl);
     const users = await res.json();
@@ -19,20 +26,34 @@ function renderUsers(users) {
   const tbody = document.getElementById("user-table-body");
   tbody.innerHTML = "";
 
+  const canEdit = hasPermission("Lista de usuarios", "Editar");
+  const canDelete = hasPermission("Lista de usuarios", "Eliminar");
+
   users.forEach(user => {
     const row = document.createElement("tr");
+
+    const editBtn = canEdit
+      ? `<button onclick='loadEditForm(${JSON.stringify(user)})' class="text-blue-600 hover:underline">Editar</button>`
+      : "";
+
+    const deleteBtn = canDelete
+      ? (
+          user.active
+            ? `<button onclick='confirmDelete(${user.id})' class="text-red-600 hover:underline">Eliminar</button>`
+            : `<button onclick='confirmActivate(${user.id})' class="text-green-600 hover:underline">Activar</button>`
+        )
+      : "";
+
+    const assignRolesBtn = `<button onclick='openAssignRolesModal(${user.id})' class="text-yellow-600 hover:underline">Asignar Roles</button>`;
+
     row.innerHTML = `
       <td class="px-4 py-2">${user.username}</td>
       <td class="px-4 py-2">${user.email}</td>
       <td class="px-4 py-2">${user.active ? "✅" : "❌"}</td>
       <td class="px-4 py-2 text-right space-x-2">
-        <button onclick='loadEditForm(${JSON.stringify(user)})' class="text-blue-600 hover:underline">Editar</button>
-        ${
-          user.active
-            ? `<button onclick='confirmDelete(${user.id})' class="text-red-600 hover:underline">Eliminar</button>`
-            : `<button onclick='confirmActivate(${user.id})' class="text-green-600 hover:underline">Activar</button>`
-        }
-        <button onclick='openAssignRolesModal(${user.id})' class="text-yellow-600 hover:underline">Asignar Roles</button>
+        ${editBtn}
+        ${deleteBtn}
+        ${assignRolesBtn}
       </td>
     `;
     tbody.appendChild(row);
@@ -206,3 +227,13 @@ assignForm.addEventListener("submit", async (e) => {
 });
 
 cancelAssign.addEventListener("click", () => assignModal.classList.add("hidden"));
+function hasPermission(form, permission) {
+  const stored = JSON.parse(localStorage.getItem("estructuraPermisos")) || [];
+
+  return stored.some(rol =>
+    rol.form?.some(f =>
+      f.name.toLowerCase() === form.toLowerCase() &&
+      f.permission?.some(p => p.toLowerCase() === permission.toLowerCase())
+    )
+  );
+}

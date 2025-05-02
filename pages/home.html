@@ -120,5 +120,33 @@
     <!-- Scripts compartidos -->
     <script src="../src/js/nav.js"></script>
 </body>
-
+<script>
+    console.log(JSON.parse(localStorage.getItem("estructuraPermisos")));
+  
+    function hasPermission(form, permission) {
+      const stored = JSON.parse(localStorage.getItem("estructuraPermisos")) || [];
+  
+      return stored.some(rol =>
+        rol.form?.some(f =>
+          f.name.toLowerCase() === form.toLowerCase() &&
+          f.permission?.some(p => p.toLowerCase() === permission.toLowerCase())
+        )
+      );
+    }
+  
+    window.addEventListener("DOMContentLoaded", () => {
+      // Ocultar tarjeta de Usuarios si no tiene permiso de Ver
+      if (!hasPermission("Lista de usuarios", "Ver")) {
+        const userCard = document.querySelector('a[href="users.html"]')?.closest("div");
+        if (userCard) userCard.remove();
+      }
+  
+      // Ocultar tarjeta de Roles si no tiene permiso de Ver
+      if (!hasPermission("Crear rol", "Ver")) {
+        const rolCard = document.querySelector('a[href="rols.html"]')?.closest("div");
+        if (rolCard) rolCard.remove();
+      }
+    });
+  </script>
+  
 </html>

@@ -136,3 +136,13 @@ cancelConfirmBtn?.addEventListener("click", () => {
 
 // Cargar al iniciar
 loadRoles();
+function hasPermission(formName, permissionName) {
+  const stored = JSON.parse(localStorage.getItem("permissions")) || [];
+
+  return stored.some(r =>
+    r.form.some(f =>
+      f.name.toLowerCase() === formName.toLowerCase() &&
+      f.permission.some(p => p.toLowerCase() === permissionName.toLowerCase())
+    )
+  );
+}
