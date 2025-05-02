@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("logout").addEventListener("click", () => {
         localStorage.removeItem("user");
+        localStorage.removeItem("permisos");
         window.location.href = "login.html";
     });
 });

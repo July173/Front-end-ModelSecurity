@@ -157,13 +157,16 @@ async function openAssignRolesModal(userId) {
     const allRolesRes = await fetch(apiRol);
     const allRoles = await allRolesRes.json();
 
+    // Filtrar solo los roles activos
+    const activeRoles = allRoles.filter(r => r.active === 1 || r.active === true);
+
     // Obtener roles ya asignados al usuario
     const assignedRes = await fetch(`https://localhost:7008/api/Rol/User/${userId}`);
     const assignedRoles = await assignedRes.json();
-    const assignedRoleIds = assignedRoles.map(r => r.id); // Asegúrate que es "id", no "rolId"
+    const assignedRoleIds = assignedRoles.map(r => r.id);
 
-    // Renderizar checkboxes
-    rolesCheckboxes.innerHTML = allRoles.map(r => `
+    // Renderizar checkboxes solo de roles activos
+    rolesCheckboxes.innerHTML = activeRoles.map(r => `
       <label class="block">
         <input type="checkbox" value="${r.id}" ${assignedRoleIds.includes(r.id) ? 'checked' : ''} class="mr-2" name="rol"> ${r.typeRol} 
       </label>
@@ -176,6 +179,7 @@ async function openAssignRolesModal(userId) {
     console.error(err);
   }
 }
+
 
 assignForm.addEventListener("submit", async (e) => {
   e.preventDefault();

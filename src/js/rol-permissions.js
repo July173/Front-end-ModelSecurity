@@ -6,6 +6,7 @@ const apiRol = "https://localhost:7008/api/Rol/";
 const apiForm = "https://localhost:7008/api/Form/";
 const apiPerm = "https://localhost:7008/api/Permission/";
 const apiAsignar = "https://localhost:7008/api/RolFormPermission/permission/";
+const apiPermByRol = "https://localhost:7008/api/RolFormPermission/getByIdRol/";
 
 // Cargar roles
 async function cargarRoles() {
@@ -14,25 +15,64 @@ async function cargarRoles() {
   rolSelect.innerHTML = data.map(r => `<option value="${r.id}">${r.typeRol}</option>`).join('');
 }
 
-// Cargar formularios y permisos
-async function cargarFormsYPerms() {
-  const forms = await (await fetch(apiForm)).json();
-  const perms = await (await fetch(apiPerm)).json();
-
-  formList.innerHTML = forms.map(form => `
-    <div class="border p-4 rounded shadow-sm">
-      <p class="font-semibold mb-2">${form.name}</p>
-      <div class="flex flex-wrap gap-2">
-        ${perms.map(p => `
+  async function cargarFormsYPerms() {
+    const forms = await (await fetch(apiForm)).json();
+    const perms = await (await fetch(apiPerm)).json();
+    const permsByRol = await (await fetch(`${apiPermByRol}${rolSelect.value}`)).json();
+  
+    console.log("Permisos del rol:", permsByRol);
+  
+    formList.innerHTML = forms.map(form => {
+      // Buscar los permisos asignados al form actual
+      const permisoAsignado = permsByRol.find(p => p.formId === form.id);
+      const permisosDelForm = permisoAsignado ? permisoAsignado.permissionIds : [];
+  
+      const checkboxes = perms.map(p => {
+        const isChecked = permisosDelForm.includes(p.id);
+        console.log(`Permiso ${p.id} para el form ${form.id}: ${isChecked}`);
+        return `
           <label class="inline-flex items-center">
-            <input type="checkbox" name="perm-${form.id}" value="${p.id}" class="mr-1">
+            <input type="checkbox" name="perm-${form.id}" value="${p.id}" ${isChecked ? "checked" : ""} class="mr-1">
             ${p.name}
           </label>
-        `).join('')}
-      </div>
-    </div>
-  `).join('');
-}
+        `;
+      }).join('');
+  
+      return `
+        <div class="border p-4 rounded shadow-sm mb-4">
+          <p class="font-semibold mb-2">${form.name}</p>
+          <div class="flex flex-wrap gap-2">
+            ${checkboxes}
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+  
+
+rolSelect.addEventListener("change", async () => {
+  const idRol = rolSelect.value;
+  if (!idRol) return;
+
+  // Limpiar formularios y permisos
+  formList.innerHTML = '';
+
+  // Cargar formularios y permisos
+  await cargarFormsYPerms();
+
+  // Obtener permisos asignados al rol seleccionado
+  //const asignados = await (await fetch(`${apiPermByRol}${idRol}`)).json();
+
+  // Marcar checkboxes según los permisos asignados
+  /*asignados.forEach(a => {
+    const checkboxes = document.querySelectorAll(`[name="perm-${a.idForm}"]`);
+    checkboxes.forEach(checkbox => {
+      if (parseInt(checkbox.value) === a.idPermission) {
+        checkbox.checked = true;
+      }
+    });
+  });*/
+});
 
 // Enviar datos
 assignForm.addEventListener("submit", async e => {
