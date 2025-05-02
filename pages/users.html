@@ -98,42 +98,35 @@
         </div>
     </main>
 
-    <!-- Modal para crear/editar usuario -->
-    <div id="user-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
-            <div class="p-6">
-               
-                <form id="edit-user-form" class="space-y-4">
-                    <input type="hidden" id="user-id">
-                    <div>
-                        <label for="personId" class="block text-sm font-medium text-gray-700 mb-1">Nombre del usuario</label>
-                        <input type="text" id="username" name="personId" required class="block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm" readonly>
-                      </div>
-                    <div>
-                        <label for="personId" class="block text-sm font-medium text-gray-700 mb-1">Correo electronico</label>
-                        <input type="text" id="email" name="personId" required class="block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm">
-                      </div>
-                    <div>
-                        <label for="personId" class="block text-sm font-medium text-gray-700 mb-1">ID Persona</label>
-                        <input type="number" id="personId" name="personId" required class="block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm">
-                      </div>
-                      <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
-                        <input type="password" id="password" name="password" required class="block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm">
-                      </div>
-                      <div class="flex items-center space-x-2">
-                        <input type="checkbox" id="active" name="active" checked class="form-checkbox text-blue-600">
-                        <label for="active" class="text-sm text-gray-700">Activo</label>
-                      </div>
-                      <div class="flex justify-end space-x-2 mt-6">
-                        <button type="button" id="cancel-form" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">Cancelar</button>
-                        <button type="submit" id="submit-form" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Guardar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+  <!-- Modal para editar usuario -->
+<div id="user-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
+      <div class="p-6">
+        <!-- ✅ Agregado: Título del modal para que JS no falle -->
+        <h3 id="modal-title" class="text-xl font-bold text-gray-800 mb-4">Editar Usuario</h3>
+  
+        <form id="edit-user-form" class="space-y-4">
+            <input type="hidden" id="user-id" />
+  
+          <div>
+            <label for="usernameform" class="block text-sm font-medium text-gray-700 mb-1">Nombre de usuario</label>
+            <input type="text" id="usernameform" name="usernameform" required class="block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm" >
+          </div>
+  
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
+            <input type="text" id="email" name="email" required class="block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm" >
+          </div>
+           
+          <div class="flex justify-end space-x-2 mt-6">
+            <button type="button" id="close-modal" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">Cancelar</button>
+            <button type="submit" id="submit-form" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Guardar</button>
+          </div>
+        </form>
+      </div>
     </div>
-
+  </div>
+  
     <!-- Modal de confirmación para eliminación -->
     <div id="confirm-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
         <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
@@ -141,12 +134,15 @@
                 <h3 class="text-xl font-bold text-gray-800 mb-4">Confirmar acción</h3>
                 <p class="text-gray-600 mb-6" id="confirm-message">¿Estás seguro de que deseas realizar esta acción?</p>
                 <div class="flex justify-end space-x-2">
-                    <button id="cancel-action" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">Cancelar</button>
+                    <button id="cancel-form" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">Cancelar</button>
                     <button id="confirm-action" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">Confirmar</button>
                 </div>
             </div>
         </div>
     </div>
+
+<!-- Modal de asignar -->
+
     <div id="assign-roles-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
         <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
           <h3 class="text-xl font-bold mb-4">Asignar Roles a Usuario</h3>
