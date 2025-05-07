@@ -6,12 +6,12 @@ const apiUserRol = "https://localhost:7008/api/RolUser/asignar";
 window.onload = fetchUsers;
 
 async function fetchUsers() {
-  if (!hasPermission("Lista de usuarios", "Ver")) {
-    // No tiene permiso de ver usuarios
-    const table = document.getElementById("user-table-body");
-    table.innerHTML = `<tr><td colspan="4" class="text-center py-4 text-gray-500">No tienes permiso para ver esta sección.</td></tr>`;
-    return;
-  }
+  // if (!hasPermission("Lista de usuarios", "Ver")) {
+  //   // No tiene permiso de ver usuarios
+  //   const table = document.getElementById("user-table-body");
+  //   table.innerHTML = `<tr><td colspan="4" class="text-center py-4 text-gray-500">No tienes permiso para ver esta sección.</td></tr>`;
+  //   return;
+  // }
 
   try {
     const res = await fetch(apiUrl);

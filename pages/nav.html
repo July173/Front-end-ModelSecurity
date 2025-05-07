@@ -1,0 +1,54 @@
+<!-- nav.html -->
+<nav class="bg-blue-800 text-white shadow-lg">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center py-4">
+        
+        <div class="flex items-center space-x-4">
+            
+          <h1 class="text-xl font-bold">Autogestión Sena</h1>
+          <div class="hidden md:flex space-x-4">
+            <a href="home.html" class="hover:text-blue-200 transition duration-200">Inicio</a>
+          </div>
+        </div>
+        
+        <div id="profile" class="flex items-center space-x-6">
+          <div>
+            <button onclick="window.location.href='profile.html'" class="flex items-center space-x-2 hover:text-cyan-600 transition">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M5.121 17.804A4.992 4.992 0 0010 20h4a4.992 4.992 0 004.879-2.196M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span id="username" class="text-lg"></span>
+            </button>
+          </div>
+          <button id="logout" class="text-white px-3 py-1 rounded hover:text-cyan-600">Cerrar sesión</button>
+        </div>
+      </div>
+      <div class="md:hidden hidden" id="mobile-menu">
+        <div class="flex flex-col space-y-2 pb-4">
+          <a href="home.html" class="hover:text-blue-200 transition duration-300">Inicio</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user) {
+        window.location.href = "login.html"; // Redirigir si no está logueado
+        return;
+    }
+
+    document.getElementById("username").textContent = user.username || user.email;
+
+    document.getElementById("logout").addEventListener("click", () => {
+        localStorage.removeItem("user");
+        localStorage.removeItem("permisos");
+        localStorage.removeItem("estructuraPermisos");
+        window.location.href = "login.html";
+    });
+
+  
+});
+  </script>
