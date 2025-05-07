@@ -52,12 +52,12 @@ function renderizarMenu(estructura) {
         const lista = document.createElement("ul");
         lista.className = "ml-2 mt-2 space-y-1";
 
-        modulo.form.forEach(nombreForm => {
+        modulo.form.forEach(formulario => {
             const item = document.createElement("li");
             const link = document.createElement("a");
 
-            link.href = "#"; // Puedes mapearlo a URLs reales si lo deseas
-            link.textContent = nombreForm;
+            link.href = `../pages/${formulario.path}`;
+            link.textContent = formulario.name; // nombre del formulario
             link.className = "block hover:text-cyan-300 transition";
 
             item.appendChild(link);
