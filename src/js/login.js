@@ -35,10 +35,10 @@ document.getElementById("loginBtn").addEventListener("click", async function (e)
             throw new Error("Error al obtener permisos estructurados.");
         }
 
-        const estructuraPermisos = await permisosResponse.json();
+        const Permisos = await permisosResponse.json();
 
         // 3️⃣ Guardar en localStorage para usar después
-        localStorage.setItem("estructuraPermisos", JSON.stringify(estructuraPermisos));
+        localStorage.setItem("Permisos", JSON.stringify(Permisos));
 
         // 4️⃣ Redirigir al home
         window.location.href = "home.html";

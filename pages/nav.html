@@ -31,6 +31,10 @@
       </div>
     </div>
   </nav>
+  <script src="../src/js/auth.js"></script>
+  <script>
+  inicializarControlSesion(); // Llama para activar protección e inactividad
+</script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -44,7 +48,7 @@
 
     document.getElementById("logout").addEventListener("click", () => {
         localStorage.removeItem("user");
-        localStorage.removeItem("permisos");
+        localStorage.removeItem("Permisos");
         localStorage.removeItem("estructuraPermisos");
         window.location.href = "login.html";
     });
